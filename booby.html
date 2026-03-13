@@ -17,7 +17,6 @@ font-family:sans-serif;
 perspective:1200px;
 }
 
-/* drifting scene */
 
 .slideshow{
 position:relative;
@@ -50,7 +49,6 @@ z-index:10;
 text-align:center;
 }
 
-/* slide container */
 
 .slide{
 position:absolute;
@@ -67,7 +65,6 @@ align-items:center;
 opacity:1;
 }
 
-/* blurred background */
 
 .bg{
 position:absolute;
@@ -78,7 +75,6 @@ filter:blur(35px) brightness(.5);
 transform:scale(1.2);
 }
 
-/* main image */
 
 .main{
 position:relative;
@@ -95,7 +91,7 @@ from{transform:scale(1)}
 to{transform:scale(1.05)}
 }
 
-/* navigation */
+
 
 .nav{
 position:absolute;
@@ -118,7 +114,7 @@ z-index:5;
 .nav.prev{left:20px;}
 .nav.next{right:20px;}
 
-/* floating heart particles */
+
 
 .particle{
 position:fixed;
@@ -144,7 +140,7 @@ transform:scale(0.3);
 }
 }
 
-/* end screen */
+
 
 .end-screen{
 position:fixed;
@@ -197,7 +193,7 @@ background:#ff5268;
 transform:scale(1.05);
 }
 
-/* grid view */
+
 .grid-view{
 position:fixed;
 top:0;
@@ -259,7 +255,7 @@ background:#ff5268;
 transform:scale(1.05);
 }
 
-/* easter message */
+/* very very hard to find unless idk*/
 
 .secret{
 position:fixed;
@@ -291,53 +287,51 @@ TAP TO BEGIN. It's a little slow at first but it gets better i promise pakka!
 
 <div class="slideshow">
 
-<!-- YOUR ORIGINAL 40 SLIDES (unchanged) -->
+<div class="slide"><img class="bg" src="image1.jpg"><img class="main" src="image1.jpg"></div>
+<div class="slide"><img class="bg" src="image2.jpg"><img class="main" src="image2.jpg"></div>
+<div class="slide"><img class="bg" src="image3.jpg"><img class="main" src="image3.jpg"></div>
+<div class="slide"><img class="bg" src="image4.jpg"><img class="main" src="image4.jpg"></div>
+<div class="slide"><img class="bg" src="image5.jpg"><img class="main" src="image5.jpg"></div>
+<div class="slide"><img class="bg" src="image6.jpg"><img class="main" src="image6.jpg"></div>
+<div class="slide"><img class="bg" src="image7.jpg"><img class="main" src="image7.jpg"></div>
+<div class="slide"><img class="bg" src="image8.jpg"><img class="main" src="image8.jpg"></div>
+<div class="slide"><img class="bg" src="image9.jpg"><img class="main" src="image9.jpg"></div>
+<div class="slide"><img class="bg" src="image10.jpg"><img class="main" src="image10.jpg"></div>
 
-<div class="slide"><img class="bg" src="images/image1.jpg"><img class="main" src="images/image1.jpg"></div>
-<div class="slide"><img class="bg" src="images/image2.jpg"><img class="main" src="images/image2.jpg"></div>
-<div class="slide"><img class="bg" src="images/image3.jpg"><img class="main" src="images/image3.jpg"></div>
-<div class="slide"><img class="bg" src="images/image4.jpg"><img class="main" src="images/image4.jpg"></div>
-<div class="slide"><img class="bg" src="images/image5.jpg"><img class="main" src="images/image5.jpg"></div>
-<div class="slide"><img class="bg" src="images/image6.jpg"><img class="main" src="images/image6.jpg"></div>
-<div class="slide"><img class="bg" src="images/image7.jpg"><img class="main" src="images/image7.jpg"></div>
-<div class="slide"><img class="bg" src="images/image8.jpg"><img class="main" src="images/image8.jpg"></div>
-<div class="slide"><img class="bg" src="images/image9.jpg"><img class="main" src="images/image9.jpg"></div>
-<div class="slide"><img class="bg" src="images/image10.jpg"><img class="main" src="images/image10.jpg"></div>
+<div class="slide"><img class="bg" src="image11.jpg"><img class="main" src="image11.jpg"></div>
+<div class="slide"><img class="bg" src="image12.jpg"><img class="main" src="image12.jpg"></div>
+<div class="slide"><img class="bg" src="image13.jpg"><img class="main" src="image13.jpg"></div>
+<div class="slide"><img class="bg" src="image14.jpg"><img class="main" src="image14.jpg"></div>
+<div class="slide"><img class="bg" src="image15.jpg"><img class="main" src="image15.jpg"></div>
+<div class="slide"><img class="bg" src="image16.jpg"><img class="main" src="image16.jpg"></div>
+<div class="slide"><img class="bg" src="image17.jpg"><img class="main" src="image17.jpg"></div>
+<div class="slide"><img class="bg" src="image18.jpg"><img class="main" src="image18.jpg"></div>
+<div class="slide"><img class="bg" src="image19.jpg"><img class="main" src="image19.jpg"></div>
+<div class="slide"><img class="bg" src="image20.jpg"><img class="main" src="image20.jpg"></div>
 
-<div class="slide"><img class="bg" src="images/image11.jpg"><img class="main" src="images/image11.jpg"></div>
-<div class="slide"><img class="bg" src="images/image12.jpg"><img class="main" src="images/image12.jpg"></div>
-<div class="slide"><img class="bg" src="images/image13.jpg"><img class="main" src="images/image13.jpg"></div>
-<div class="slide"><img class="bg" src="images/image14.jpg"><img class="main" src="images/image14.jpg"></div>
-<div class="slide"><img class="bg" src="images/image15.jpg"><img class="main" src="images/image15.jpg"></div>
-<div class="slide"><img class="bg" src="images/image16.jpg"><img class="main" src="images/image16.jpg"></div>
-<div class="slide"><img class="bg" src="images/image17.jpg"><img class="main" src="images/image17.jpg"></div>
-<div class="slide"><img class="bg" src="images/image18.jpg"><img class="main" src="images/image18.jpg"></div>
-<div class="slide"><img class="bg" src="images/image19.jpg"><img class="main" src="images/image19.jpg"></div>
-<div class="slide"><img class="bg" src="images/image20.jpg"><img class="main" src="images/image20.jpg"></div>
+<div class="slide"><img class="bg" src="image21.jpg"><img class="main" src="image21.jpg"></div>
+<div class="slide"><img class="bg" src="image22.jpg"><img class="main" src="image22.jpg"></div>
+<div class="slide"><img class="bg" src="image23.jpg"><img class="main" src="image23.jpg"></div>
+<div class="slide"><img class="bg" src="image24.jpg"><img class="main" src="image24.jpg"></div>
+<div class="slide"><img class="bg" src="image25.jpg"><img class="main" src="image25.jpg"></div>
+<div class="slide"><img class="bg" src="image26.jpg"><img class="main" src="image26.jpg"></div>
+<div class="slide"><img class="bg" src="image27.jpg"><img class="main" src="image27.jpg"></div>
+<div class="slide"><img class="bg" src="image28.jpg"><img class="main" src="image28.jpg"></div>
+<div class="slide"><img class="bg" src="image29.jpg"><img class="main" src="image29.jpg"></div>
+<div class="slide"><img class="bg" src="image30.jpg"><img class="main" src="image30.jpg"></div>
 
-<div class="slide"><img class="bg" src="images/image21.jpg"><img class="main" src="images/image21.jpg"></div>
-<div class="slide"><img class="bg" src="images/image22.jpg"><img class="main" src="images/image22.jpg"></div>
-<div class="slide"><img class="bg" src="images/image23.jpg"><img class="main" src="images/image23.jpg"></div>
-<div class="slide"><img class="bg" src="images/image24.jpg"><img class="main" src="images/image24.jpg"></div>
-<div class="slide"><img class="bg" src="images/image25.jpg"><img class="main" src="images/image25.jpg"></div>
-<div class="slide"><img class="bg" src="images/image26.jpg"><img class="main" src="images/image26.jpg"></div>
-<div class="slide"><img class="bg" src="images/image27.jpg"><img class="main" src="images/image27.jpg"></div>
-<div class="slide"><img class="bg" src="images/image28.jpg"><img class="main" src="images/image28.jpg"></div>
-<div class="slide"><img class="bg" src="images/image29.jpg"><img class="main" src="images/image29.jpg"></div>
-<div class="slide"><img class="bg" src="images/image30.jpg"><img class="main" src="images/image30.jpg"></div>
-
-<div class="slide"><img class="bg" src="images/image31.jpg"><img class="main" src="images/image31.jpg"></div>
-<div class="slide"><img class="bg" src="images/image32.jpg"><img class="main" src="images/image32.jpg"></div>
-<div class="slide"><img class="bg" src="images/image33.jpg"><img class="main" src="images/image33.jpg"></div>
-<div class="slide"><img class="bg" src="images/image34.jpg"><img class="main" src="images/image34.jpg"></div>
-<div class="slide"><img class="bg" src="images/image35.jpg"><img class="main" src="images/image35.jpg"></div>
-<div class="slide"><img class="bg" src="images/image36.jpg"><img class="main" src="images/image36.jpg"></div>
-<div class="slide"><img class="bg" src="images/image37.jpg"><img class="main" src="images/image37.jpg"></div>
-<div class="slide"><img class="bg" src="images/image38.jpg"><img class="main" src="images/image38.jpg"></div>
-<div class="slide"><img class="bg" src="images/image39.jpg"><img class="main" src="images/image39.jpg"></div>
-<div class="slide"><img class="bg" src="images/image40.jpg"><img class="main" src="images/image40.jpg"></div>
-<div class="slide"><img class="bg" src="images/image41.jpg"><img class="main" src="images/image41.jpg"></div>
-
+<div class="slide"><img class="bg" src="image31.jpg"><img class="main" src="image31.jpg"></div>
+<div class="slide"><img class="bg" src="image32.jpg"><img class="main" src="image32.jpg"></div>
+<div class="slide"><img class="bg" src="image33.jpg"><img class="main" src="image33.jpg"></div>
+<div class="slide"><img class="bg" src="image34.jpg"><img class="main" src="image34.jpg"></div>
+<div class="slide"><img class="bg" src="image35.jpg"><img class="main" src="image35.jpg"></div>
+<div class="slide"><img class="bg" src="image36.jpg"><img class="main" src="image36.jpg"></div>
+<div class="slide"><img class="bg" src="image37.jpg"><img class="main" src="image37.jpg"></div>
+<div class="slide"><img class="bg" src="image38.jpg"><img class="main" src="image38.jpg"></div>
+<div class="slide"><img class="bg" src="image39.jpg"><img class="main" src="image39.jpg"></div>
+<div class="slide"><img class="bg" src="image40.jpg"><img class="main" src="image40.jpg"></div>
+<div class="slide"><img class="bg" src="image41.jpg"><img class="main" src="image41.jpg"></div>
+  
 <button class="nav prev">❮</button> <button class="nav next">❯</button>
 
 </div>
@@ -525,4 +519,5 @@ setTimeout(()=>clicks=0,2000)
 </script>
 
 </body>
+
 </html>
