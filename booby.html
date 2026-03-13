@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memories</title>
+
+<style>
+
+body{
+margin:0;
+background:black;
+overflow:hidden;
+height:100vh;
+font-family:sans-serif;
+perspective:1200px;
+}
+
+/* drifting scene */
+
+.slideshow{
+position:relative;
+width:100vw;
+height:100vh;
+overflow:hidden;
+transform-style:preserve-3d;
+animation:sceneDrift 40s ease-in-out infinite alternate;
+}
+
+@keyframes sceneDrift{
+0%{transform:rotateY(-4deg) rotateX(2deg)}
+100%{transform:rotateY(4deg) rotateX(-2deg)}
+}
+
+.start-screen{
+position:fixed;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+color:white;
+font-size:20px;
+letter-spacing:2px;
+cursor:pointer;
+z-index:10;
+text-align:center;
+}
+
+/* slide container */
+
+.slide{
+position:absolute;
+width:100%;
+height:100%;
+opacity:0;
+transition:opacity 1s ease-in-out;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.slide.active{
+opacity:1;
+}
+
+/* blurred background */
+
+.bg{
+position:absolute;
+width:120%;
+height:120%;
+object-fit:cover;
+filter:blur(35px) brightness(.5);
+transform:scale(1.2);
+}
+
+/* main image */
+
+.main{
+position:relative;
+max-width:85vw;
+max-height:85vh;
+object-fit:contain;
+border-radius:20px;
+box-shadow:0 25px 60px rgba(0,0,0,0.8);
+animation:zoom 10s ease-in-out infinite alternate;
+}
+
+@keyframes zoom{
+from{transform:scale(1)}
+to{transform:scale(1.05)}
+}
+
+/* navigation */
+
+.nav{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+background:rgba(0,0,0,0.5);
+border:none;
+color:white;
+font-size:2rem;
+padding:0.4rem 0.9rem;
+cursor:pointer;
+opacity:0;
+transition:opacity .3s;
+z-index:5;
+}
+
+.slideshow:hover .nav{opacity:.8;}
+.nav:hover{opacity:1;}
+
+.nav.prev{left:20px;}
+.nav.next{right:20px;}
+
+/* floating heart particles */
+
+.particle{
+position:fixed;
+bottom:0;
+width:60px;
+height:60px;
+opacity:1;
+animation:floatUp 8s linear forwards;
+pointer-events:none;
+z-index:3;
+}
+
+@keyframes floatUp{
+0%{
+bottom:0;
+opacity:1;
+transform:scale(1);
+}
+100%{
+bottom:100vh;
+opacity:0;
+transform:scale(0.3);
+}
+}
+
+/* end screen */
+
+.end-screen{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.95);
+border:5px solid #ff6b81;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+color:white;
+font-size:32px;
+letter-spacing:2px;
+opacity:0;
+visibility:hidden;
+transition:opacity 1s ease-in-out, visibility 1s ease-in-out;
+z-index:100;
+text-align:center;
+}
+
+.end-screen.show{
+opacity:1;
+visibility:visible;
+pointer-events:auto;
+}
+
+.end-screen-text{
+margin-bottom:40px;
+font-size:48px;
+color:#ff6b81;
+}
+
+.end-screen-button{
+background:#ff6b81;
+color:white;
+border:2px solid #ff6b81;
+padding:15px 40px;
+font-size:18px;
+border-radius:50px;
+cursor:pointer;
+margin:10px;
+transition:all .3s;
+}
+
+.end-screen-button:hover{
+background:#ff5268;
+transform:scale(1.05);
+}
+
+/* grid view */
+.grid-view{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgb(0,0,0);
+display:grid;
+grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
+gap:10px;
+padding:20px;
+overflow-y:auto;
+opacity:0;
+visibility:hidden;
+transition:opacity 0.5s, visibility 0.5s;
+z-index:50;
+}
+.grid-view.show{
+opacity:1;
+visibility:visible;
+}
+.grid-item{
+position:relative;
+width:100%;
+padding-bottom:100%;
+cursor:pointer;
+overflow:hidden;
+border-radius:8px;
+box-shadow:0 4px 12px rgba(255,107,129,0.3);
+transition:transform 0.2s;
+}
+.grid-item:hover{
+transform:scale(1.05);
+}
+.grid-item img{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+}
+.grid-back-button{
+position:fixed;
+top:20px;
+left:20px;
+background:#ff6b81;
+color:white;
+border:none;
+padding:12px 24px;
+font-size:16px;
+border-radius:50px;
+cursor:pointer;
+z-index:60;
+transition:all 0.3s;
+}
+.grid-back-button:hover{
+background:#ff5268;
+transform:scale(1.05);
+}
+
+/* easter message */
+
+.secret{
+position:fixed;
+bottom:70px;
+left:50%;
+transform:translateX(-50%);
+color:white;
+font-size:28px;
+opacity:0;
+transition:opacity .6s;
+pointer-events:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="start-screen" onclick="startExperience()">
+TAP TO BEGIN. It's a little slow at first but it gets better i promise pakka!
+<br>
+<small style="opacity:.6;font-size:.7rem;">click, swipe, or arrows</small>
+</div>
+
+<audio id="bgMusic" loop preload="auto">
+<source src="music.mp3" type="audio/mp3">
+</audio>
+
+<div class="slideshow">
+
+<!-- YOUR ORIGINAL 40 SLIDES (unchanged) -->
+
+<div class="slide"><img class="bg" src="images/image1.jpg"><img class="main" src="images/image1.jpg"></div>
+<div class="slide"><img class="bg" src="images/image2.jpg"><img class="main" src="images/image2.jpg"></div>
+<div class="slide"><img class="bg" src="images/image3.jpg"><img class="main" src="images/image3.jpg"></div>
+<div class="slide"><img class="bg" src="images/image4.jpg"><img class="main" src="images/image4.jpg"></div>
+<div class="slide"><img class="bg" src="images/image5.jpg"><img class="main" src="images/image5.jpg"></div>
+<div class="slide"><img class="bg" src="images/image6.jpg"><img class="main" src="images/image6.jpg"></div>
+<div class="slide"><img class="bg" src="images/image7.jpg"><img class="main" src="images/image7.jpg"></div>
+<div class="slide"><img class="bg" src="images/image8.jpg"><img class="main" src="images/image8.jpg"></div>
+<div class="slide"><img class="bg" src="images/image9.jpg"><img class="main" src="images/image9.jpg"></div>
+<div class="slide"><img class="bg" src="images/image10.jpg"><img class="main" src="images/image10.jpg"></div>
+
+<div class="slide"><img class="bg" src="images/image11.jpg"><img class="main" src="images/image11.jpg"></div>
+<div class="slide"><img class="bg" src="images/image12.jpg"><img class="main" src="images/image12.jpg"></div>
+<div class="slide"><img class="bg" src="images/image13.jpg"><img class="main" src="images/image13.jpg"></div>
+<div class="slide"><img class="bg" src="images/image14.jpg"><img class="main" src="images/image14.jpg"></div>
+<div class="slide"><img class="bg" src="images/image15.jpg"><img class="main" src="images/image15.jpg"></div>
+<div class="slide"><img class="bg" src="images/image16.jpg"><img class="main" src="images/image16.jpg"></div>
+<div class="slide"><img class="bg" src="images/image17.jpg"><img class="main" src="images/image17.jpg"></div>
+<div class="slide"><img class="bg" src="images/image18.jpg"><img class="main" src="images/image18.jpg"></div>
+<div class="slide"><img class="bg" src="images/image19.jpg"><img class="main" src="images/image19.jpg"></div>
+<div class="slide"><img class="bg" src="images/image20.jpg"><img class="main" src="images/image20.jpg"></div>
+
+<div class="slide"><img class="bg" src="images/image21.jpg"><img class="main" src="images/image21.jpg"></div>
+<div class="slide"><img class="bg" src="images/image22.jpg"><img class="main" src="images/image22.jpg"></div>
+<div class="slide"><img class="bg" src="images/image23.jpg"><img class="main" src="images/image23.jpg"></div>
+<div class="slide"><img class="bg" src="images/image24.jpg"><img class="main" src="images/image24.jpg"></div>
+<div class="slide"><img class="bg" src="images/image25.jpg"><img class="main" src="images/image25.jpg"></div>
+<div class="slide"><img class="bg" src="images/image26.jpg"><img class="main" src="images/image26.jpg"></div>
+<div class="slide"><img class="bg" src="images/image27.jpg"><img class="main" src="images/image27.jpg"></div>
+<div class="slide"><img class="bg" src="images/image28.jpg"><img class="main" src="images/image28.jpg"></div>
+<div class="slide"><img class="bg" src="images/image29.jpg"><img class="main" src="images/image29.jpg"></div>
+<div class="slide"><img class="bg" src="images/image30.jpg"><img class="main" src="images/image30.jpg"></div>
+
+<div class="slide"><img class="bg" src="images/image31.jpg"><img class="main" src="images/image31.jpg"></div>
+<div class="slide"><img class="bg" src="images/image32.jpg"><img class="main" src="images/image32.jpg"></div>
+<div class="slide"><img class="bg" src="images/image33.jpg"><img class="main" src="images/image33.jpg"></div>
+<div class="slide"><img class="bg" src="images/image34.jpg"><img class="main" src="images/image34.jpg"></div>
+<div class="slide"><img class="bg" src="images/image35.jpg"><img class="main" src="images/image35.jpg"></div>
+<div class="slide"><img class="bg" src="images/image36.jpg"><img class="main" src="images/image36.jpg"></div>
+<div class="slide"><img class="bg" src="images/image37.jpg"><img class="main" src="images/image37.jpg"></div>
+<div class="slide"><img class="bg" src="images/image38.jpg"><img class="main" src="images/image38.jpg"></div>
+<div class="slide"><img class="bg" src="images/image39.jpg"><img class="main" src="images/image39.jpg"></div>
+<div class="slide"><img class="bg" src="images/image40.jpg"><img class="main" src="images/image40.jpg"></div>
+<div class="slide"><img class="bg" src="images/image41.jpg"><img class="main" src="images/image41.jpg"></div>
+
+<button class="nav prev">❮</button> <button class="nav next">❯</button>
+
+</div>
+
+<div class="secret" id="secret">YAYYYYY. IM SO PROUD OF YOU, you found it baby i love you ❤️</div>
+
+<div class="end-screen" id="endScreen">
+<div class="end-screen-text">You Made It!(i hope it wasn't boring) </div>
+<p style="font-size:20px;opacity:.8;margin-bottom:30px;">Thank you for looking so good and i hope this doesnt make me look weird or like a stalker im so sorry you just looked so good</p>
+<p style="font-size:20px;opacity:.8;margin-bottom:30px;">HEHHEHEHE YOU'RE MY GIRLFRIEND HEHEHEHEHHEHEHEH.</p>
+<p style="font-size:20px;opacity:.8;margin-bottom:30px;">don't kill me for the pics.</p>
+<button class="end-screen-button" onclick="viewAllSlides()">View All Slides</button>
+<button class="end-screen-button" onclick="resetSlideshow()">Watch Again</button>
+<button class="end-screen-button" onclick="location.reload()">Start Over</button>
+</div>
+
+<div class="grid-view" id="gridView"></div>
+<button class="grid-back-button" id="gridBackBtn" style="display:none;" onclick="closeGridView()">← Back</button>
+
+<script>
+
+/* original slideshow logic */
+
+let slides=document.querySelectorAll(".slide")
+let current=0
+let timer
+let isEndScreenActive=false
+
+function showSlide(i){
+slides.forEach((s,index)=>{
+s.classList.toggle("active",index===i)
+})
+
+if(i===slides.length-1){
+setTimeout(()=>{
+document.getElementById("endScreen").classList.add("show")
+isEndScreenActive=true
+clearInterval(timer)
+},500)
+}else{
+document.getElementById("endScreen").classList.remove("show")
+isEndScreenActive=false
+}
+}
+
+function nextSlide(){
+current=(current+1)%slides.length
+showSlide(current)
+}
+
+function prevSlide(){
+current=(current-1+slides.length)%slides.length
+showSlide(current)
+}
+
+function resetTimer(){
+clearInterval(timer)
+timer=setInterval(nextSlide,2800)
+}
+
+function startExperience(){
+document.querySelector(".start-screen").style.display="none"
+document.getElementById("bgMusic").play().catch(()=>{})
+showSlide(current)
+resetTimer()
+}
+
+function resetSlideshow(){
+current=0
+isEndScreenActive=false
+document.getElementById("endScreen").classList.remove("show")
+showSlide(current)
+resetTimer()
+}
+
+function viewAllSlides(){
+document.getElementById("endScreen").classList.remove("show")
+const gridView=document.getElementById("gridView")
+gridView.innerHTML=""
+slides.forEach((slide,index)=>{
+const mainImg=slide.querySelector(".main")
+const src=mainImg.src
+const gridItem=document.createElement("div")
+gridItem.className="grid-item"
+gridItem.innerHTML=`<img src="${src}" alt="Slide ${index+1}">`
+gridItem.onclick=()=>viewSlideFromGrid(index)
+gridView.appendChild(gridItem)
+})
+gridView.classList.add("show")
+document.getElementById("gridBackBtn").style.display="block"
+}
+
+function closeGridView(){
+const gridView=document.getElementById("gridView")
+gridView.classList.remove("show")
+document.getElementById("gridBackBtn").style.display="none"
+isEndScreenActive=true
+document.getElementById("endScreen").classList.add("show")
+}
+
+function viewSlideFromGrid(index){
+const gridView=document.getElementById("gridView")
+gridView.classList.remove("show")
+document.getElementById("gridBackBtn").style.display="none"
+isEndScreenActive=false
+current=index
+showSlide(current)
+setTimeout(()=>{
+resetTimer()
+},5000)
+}
+
+/* navigation */
+
+document.querySelector(".prev").addEventListener("click",e=>{
+if(isEndScreenActive)return
+e.stopPropagation()
+prevSlide()
+resetTimer()
+})
+
+document.querySelector(".next").addEventListener("click",e=>{
+if(isEndScreenActive)return
+e.stopPropagation()
+nextSlide()
+resetTimer()
+})
+
+document.querySelector(".slideshow").addEventListener("click",()=>{
+if(isEndScreenActive)return
+nextSlide()
+resetTimer()
+})
+
+/* swipe */
+
+let touchStart=0
+
+window.addEventListener("touchstart",e=>{
+touchStart=e.changedTouches[0].screenX
+})
+
+window.addEventListener("touchend",e=>{
+if(isEndScreenActive)return
+let dx=e.changedTouches[0].screenX-touchStart
+if(Math.abs(dx)>60){
+if(dx<0){nextSlide()}
+else{prevSlide()}
+resetTimer()
+}
+})
+
+/* better heart particles */
+
+function createParticle(){
+const heart=document.createElement("div")
+heart.className="particle"
+heart.style.left=Math.random()*100+"vw"
+heart.style.animationDuration=(7+Math.random()*4)+"s"
+heart.innerHTML=`<svg viewBox="0 0 24 24" fill="#ff6b81" style="width:100%;height:100%;filter:drop-shadow(0 0 8px rgba(255,107,129,0.8));">
+<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+</svg>`
+document.body.appendChild(heart)
+setTimeout(()=>heart.remove(),12000)
+}
+
+setInterval(createParticle,900)
+
+/* easter egg */
+
+let clicks=0
+
+document.addEventListener("click",()=>{
+clicks++
+
+if(clicks===6){
+document.getElementById("secret").style.opacity=1
+setTimeout(()=>{document.getElementById("secret").style.opacity=0},4000)
+clicks=0
+}
+
+setTimeout(()=>clicks=0,2000)
+})
+
+</script>
+
+</body>
+</html>
