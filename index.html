@@ -329,7 +329,6 @@ pointer-events:none;
 <p style="font-size:20px;opacity:.8;margin-bottom:30px;">don't kill me for the pics.</p>
 <button class="end-screen-button" onclick="viewAllSlides()">View All Slides</button>
   <button class="end-screen-button" onclick="resetSlideshow()">Watch Again</button>
-  <button class="end-screen-button" onclick="restartFromBeginning()">Back to Start</button>
 
 <div class="grid-view" id="gridView"></div>
 <button class="grid-back-button" id="gridBackBtn" style="display:none;" onclick="closeGridView()">← Back</button>
@@ -442,17 +441,6 @@ function resetSlideshow() {
   document.getElementById("endScreen").classList.remove("show")
   showSlide(current)
   resetTimer()
-}
-
-function restartFromBeginning() {
-  current = 0
-  isEndScreenActive = false
-  document.getElementById("endScreen").classList.remove("show")
-  startScreen.style.display = "flex"
-  resetTimer()
-  bgMusic.pause()
-  bgMusic.currentTime = 0
-  document.body.style.overflow = "hidden"
 }
 
 function viewAllSlides() {
