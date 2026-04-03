@@ -231,6 +231,7 @@ grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
 gap:10px;
 padding:20px;
 overflow-y:auto;
+-webkit-overflow-scrolling: touch;
 opacity:0;
 visibility:hidden;
 transition:opacity 0.5s, visibility 0.5s;
@@ -327,9 +328,8 @@ pointer-events:none;
 <p style="font-size:20px;opacity:.8;margin-bottom:30px;">HEHHEHEHE YOU'RE MY GIRLFRIEND HEHEHEHEHHEHEHEH.</p>
 <p style="font-size:20px;opacity:.8;margin-bottom:30px;">don't kill me for the pics.</p>
 <button class="end-screen-button" onclick="viewAllSlides()">View All Slides</button>
-<button class="end-screen-button" onclick="resetSlideshow()">Watch Again</button>
-<button class="end-screen-button" onclick="location.reload()">Start Over</button>
-</div>
+  <button class="end-screen-button" onclick="resetSlideshow()">Watch Again</button>
+  <button class="end-screen-button" onclick="restartFromBeginning()">Back to Start</button>
 
 <div class="grid-view" id="gridView"></div>
 <button class="grid-back-button" id="gridBackBtn" style="display:none;" onclick="closeGridView()">← Back</button>
@@ -415,7 +415,7 @@ function prevSlide() {
 
 function resetTimer() {
   clearInterval(timer)
-  timer = setInterval(nextSlide, 2800)
+  timer = setInterval(nextSlide, 2200) /* faster slideshow */
 }
 
 function updateAudioToggle() {
@@ -444,10 +444,22 @@ function resetSlideshow() {
   resetTimer()
 }
 
+function restartFromBeginning() {
+  current = 0
+  isEndScreenActive = false
+  document.getElementById("endScreen").classList.remove("show")
+  startScreen.style.display = "flex"
+  resetTimer()
+  bgMusic.pause()
+  bgMusic.currentTime = 0
+  document.body.style.overflow = "hidden"
+}
+
 function viewAllSlides() {
   document.getElementById("endScreen").classList.remove("show")
   const gridView = document.getElementById("gridView")
   gridView.innerHTML = ""
+  document.body.style.overflow = "auto" /* allow scrolling on grid */
 
   slides.forEach((slide, index) => {
     const mainImg = slide.querySelector(".main")
@@ -466,6 +478,7 @@ function viewAllSlides() {
 function closeGridView() {
   document.getElementById("gridView").classList.remove("show")
   gridBackBtn.style.display = "none"
+  document.body.style.overflow = "hidden"
   isEndScreenActive = true
   document.getElementById("endScreen").classList.add("show")
 }
