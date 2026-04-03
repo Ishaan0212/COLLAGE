@@ -44,11 +44,36 @@ flex-direction:column;
 color:white;
 font-size:20px;
 letter-spacing:2px;
+width:100%;
 cursor:pointer;
 z-index:10;
 text-align:center;
 }
 
+.start-screen button {
+  font-size: 1rem;
+  border-radius: 30px;
+  padding: 0.5rem 1rem;
+  border: 2px solid #ff6b81;
+  background: rgba(255,107,129,0.9);
+  color: white;
+}
+
+.start-screen button:hover {
+  background: #ff5268;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slideshow,
+  .main,
+  .particle,
+  .slide,
+  .end-screen,
+  .grid-view {
+    animation: none !important;
+    transition-duration: 0s !important;
+  }
+}
 
 .slide{
 position:absolute;
@@ -275,65 +300,23 @@ pointer-events:none;
 
 <body>
 
-<div class="start-screen" onclick="startExperience()">
-TAP TO BEGIN. It's a little slow at first but it gets better i promise pakka!
-<br>
-<small style="opacity:.6;font-size:.7rem;">click, swipe, or arrows</small>
+<div class="start-screen" id="startScreen" tabindex="0" role="button" aria-label="Start slideshow">
+  <div>TAP TO BEGIN. It's a little slow at first but it gets better I promise pakka!</div>
+  <div class="start-controls" style="margin-top:16px; display:flex; gap:10px; align-items:center;">
+    <button id="startBtn" class="end-screen-button" onclick="startExperience()" aria-label="Start slideshow">Start</button>
+    <button id="audioToggle" class="end-screen-button" onclick="toggleAudio()" aria-label="Toggle background music">Music: On</button>
+  </div>
+  <small style="opacity:.6;font-size:.7rem; margin-top:8px; display:block;">click, swipe, or arrows</small>
 </div>
 
 <audio id="bgMusic" loop preload="auto">
 <source src="music.mp3" type="audio/mp3">
 </audio>
 
-<div class="slideshow">
-
-<div class="slide"><img class="bg" src="image1.jpg"><img class="main" src="image1.jpg"></div>
-<div class="slide"><img class="bg" src="image2.jpg"><img class="main" src="image2.jpg"></div>
-<div class="slide"><img class="bg" src="image3.jpg"><img class="main" src="image3.jpg"></div>
-<div class="slide"><img class="bg" src="image4.jpg"><img class="main" src="image4.jpg"></div>
-<div class="slide"><img class="bg" src="image5.jpg"><img class="main" src="image5.jpg"></div>
-<div class="slide"><img class="bg" src="image6.jpg"><img class="main" src="image6.jpg"></div>
-<div class="slide"><img class="bg" src="image7.jpg"><img class="main" src="image7.jpg"></div>
-<div class="slide"><img class="bg" src="image8.jpg"><img class="main" src="image8.jpg"></div>
-<div class="slide"><img class="bg" src="image9.jpg"><img class="main" src="image9.jpg"></div>
-<div class="slide"><img class="bg" src="image10.jpg"><img class="main" src="image10.jpg"></div>
-
-<div class="slide"><img class="bg" src="image11.jpg"><img class="main" src="image11.jpg"></div>
-<div class="slide"><img class="bg" src="image12.jpg"><img class="main" src="image12.jpg"></div>
-<div class="slide"><img class="bg" src="image13.jpg"><img class="main" src="image13.jpg"></div>
-<div class="slide"><img class="bg" src="image14.jpg"><img class="main" src="image14.jpg"></div>
-<div class="slide"><img class="bg" src="image15.jpg"><img class="main" src="image15.jpg"></div>
-<div class="slide"><img class="bg" src="image16.jpg"><img class="main" src="image16.jpg"></div>
-<div class="slide"><img class="bg" src="image17.jpg"><img class="main" src="image17.jpg"></div>
-<div class="slide"><img class="bg" src="image18.jpg"><img class="main" src="image18.jpg"></div>
-<div class="slide"><img class="bg" src="image19.jpg"><img class="main" src="image19.jpg"></div>
-<div class="slide"><img class="bg" src="image20.jpg"><img class="main" src="image20.jpg"></div>
-
-<div class="slide"><img class="bg" src="image21.jpg"><img class="main" src="image21.jpg"></div>
-<div class="slide"><img class="bg" src="image22.jpg"><img class="main" src="image22.jpg"></div>
-<div class="slide"><img class="bg" src="image23.jpg"><img class="main" src="image23.jpg"></div>
-<div class="slide"><img class="bg" src="image24.jpg"><img class="main" src="image24.jpg"></div>
-<div class="slide"><img class="bg" src="image25.jpg"><img class="main" src="image25.jpg"></div>
-<div class="slide"><img class="bg" src="image26.jpg"><img class="main" src="image26.jpg"></div>
-<div class="slide"><img class="bg" src="image27.jpg"><img class="main" src="image27.jpg"></div>
-<div class="slide"><img class="bg" src="image28.jpg"><img class="main" src="image28.jpg"></div>
-<div class="slide"><img class="bg" src="image29.jpg"><img class="main" src="image29.jpg"></div>
-<div class="slide"><img class="bg" src="image30.jpg"><img class="main" src="image30.jpg"></div>
-
-<div class="slide"><img class="bg" src="image31.jpg"><img class="main" src="image31.jpg"></div>
-<div class="slide"><img class="bg" src="image32.jpg"><img class="main" src="image32.jpg"></div>
-<div class="slide"><img class="bg" src="image33.jpg"><img class="main" src="image33.jpg"></div>
-<div class="slide"><img class="bg" src="image34.jpg"><img class="main" src="image34.jpg"></div>
-<div class="slide"><img class="bg" src="image35.jpg"><img class="main" src="image35.jpg"></div>
-<div class="slide"><img class="bg" src="image36.jpg"><img class="main" src="image36.jpg"></div>
-<div class="slide"><img class="bg" src="image37.jpg"><img class="main" src="image37.jpg"></div>
-<div class="slide"><img class="bg" src="image38.jpg"><img class="main" src="image38.jpg"></div>
-<div class="slide"><img class="bg" src="image39.jpg"><img class="main" src="image39.jpg"></div>
-<div class="slide"><img class="bg" src="image40.jpg"><img class="main" src="image40.jpg"></div>
-<div class="slide"><img class="bg" src="image41.jpg"><img class="main" src="image41.jpg"></div>
-  
-<button class="nav prev">❮</button> <button class="nav next">❯</button>
-
+<div class="slideshow" id="slideshow">
+  <!-- slides are generated dynamically by JavaScript -->
+  <button class="nav prev" aria-label="Previous slide">❮</button>
+  <button class="nav next" aria-label="Next slide">❯</button>
 </div>
 
 <div class="secret" id="secret">YAYYYYY. IM SO PROUD OF YOU, you found it baby i love you ❤️</div>
@@ -353,173 +336,229 @@ TAP TO BEGIN. It's a little slow at first but it gets better i promise pakka!
 
 <script>
 
-/* original slideshow logic */
+const imageCount = 41
+const slidesContainer = document.getElementById("slideshow")
+const bgMusic = document.getElementById("bgMusic")
+const startScreen = document.getElementById("startScreen")
+const audioToggle = document.getElementById("audioToggle")
+const gridBackBtn = document.getElementById("gridBackBtn")
+let slides = []
+let current = 0
+let timer = null
+let isEndScreenActive = false
+let particleTimer = null
 
-let slides=document.querySelectorAll(".slide")
-let current=0
-let timer
-let isEndScreenActive=false
+function createSlide(i) {
+  const slide = document.createElement("div")
+  slide.className = "slide"
+  slide.setAttribute("role", "group")
+  slide.setAttribute("aria-label", `Slide ${i} of ${imageCount}`)
 
-function showSlide(i){
-slides.forEach((s,index)=>{
-s.classList.toggle("active",index===i)
+  const bg = document.createElement("img")
+  bg.className = "bg"
+  bg.src = `image${i}.jpg`
+  bg.alt = `Background image ${i}`
+  bg.loading = "lazy"
+  bg.onerror = () => (bg.src = "fallback.jpg")
+
+  const main = document.createElement("img")
+  main.className = "main"
+  main.src = `image${i}.jpg`
+  main.alt = `Main slide image ${i}`
+  main.loading = "lazy"
+  main.onerror = () => (main.src = "fallback.jpg")
+
+  slide.appendChild(bg)
+  slide.appendChild(main)
+  return slide
+}
+
+function createSlides() {
+  slidesContainer.innerHTML = ""
+  for (let i = 1; i <= imageCount; i++) {
+    slidesContainer.appendChild(createSlide(i))
+  }
+  slides = slidesContainer.querySelectorAll(".slide")
+  showSlide(current)
+}
+
+function showSlide(i) {
+  if (!slides.length) {
+    return
+  }
+
+  slides.forEach((s, index) => {
+    s.classList.toggle("active", index === i)
+  })
+
+  if (i === slides.length - 1) {
+    setTimeout(() => {
+      document.getElementById("endScreen").classList.add("show")
+      isEndScreenActive = true
+      clearInterval(timer)
+    }, 500)
+  } else {
+    document.getElementById("endScreen").classList.remove("show")
+    isEndScreenActive = false
+  }
+}
+
+function nextSlide() {
+  current = (current + 1) % slides.length
+  showSlide(current)
+}
+
+function prevSlide() {
+  current = (current - 1 + slides.length) % slides.length
+  showSlide(current)
+}
+
+function resetTimer() {
+  clearInterval(timer)
+  timer = setInterval(nextSlide, 2800)
+}
+
+function updateAudioToggle() {
+  audioToggle.textContent = bgMusic.muted ? "Music: Off" : "Music: On"
+  audioToggle.setAttribute("aria-pressed", bgMusic.muted.toString())
+}
+
+function toggleAudio() {
+  bgMusic.muted = !bgMusic.muted
+  updateAudioToggle()
+}
+
+function startExperience() {
+  startScreen.style.display = "none"
+  bgMusic.play().catch(() => {})
+  updateAudioToggle()
+  createSlides()
+  resetTimer()
+}
+
+function resetSlideshow() {
+  current = 0
+  isEndScreenActive = false
+  document.getElementById("endScreen").classList.remove("show")
+  showSlide(current)
+  resetTimer()
+}
+
+function viewAllSlides() {
+  document.getElementById("endScreen").classList.remove("show")
+  const gridView = document.getElementById("gridView")
+  gridView.innerHTML = ""
+
+  slides.forEach((slide, index) => {
+    const mainImg = slide.querySelector(".main")
+    const src = mainImg?.src || "fallback.jpg"
+    const gridItem = document.createElement("div")
+    gridItem.className = "grid-item"
+    gridItem.innerHTML = `<img src="${src}" alt="Slide ${index + 1}">`
+    gridItem.onclick = () => viewSlideFromGrid(index)
+    gridView.appendChild(gridItem)
+  })
+
+  gridView.classList.add("show")
+  gridBackBtn.style.display = "block"
+}
+
+function closeGridView() {
+  document.getElementById("gridView").classList.remove("show")
+  gridBackBtn.style.display = "none"
+  isEndScreenActive = true
+  document.getElementById("endScreen").classList.add("show")
+}
+
+function viewSlideFromGrid(index) {
+  document.getElementById("gridView").classList.remove("show")
+  gridBackBtn.style.display = "none"
+  isEndScreenActive = false
+  current = index
+  showSlide(current)
+  setTimeout(() => {
+    resetTimer()
+  }, 5000)
+}
+
+function createParticle() {
+  const heart = document.createElement("div")
+  heart.className = "particle"
+  heart.style.left = Math.random() * 100 + "vw"
+  heart.style.animationDuration = (7 + Math.random() * 4) + "s"
+  heart.innerHTML = `<svg viewBox="0 0 24 24" fill="#ff6b81" style="width:100%;height:100%;filter:drop-shadow(0 0 8px rgba(255,107,129,0.8));"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`
+  document.body.appendChild(heart)
+  setTimeout(() => heart.remove(), 12000)
+}
+
+function startParticles() {
+  clearInterval(particleTimer)
+  particleTimer = setInterval(createParticle, 900)
+}
+
+function initKeyboard() {
+  window.addEventListener("keydown", (event) => {
+    const activeStart = startScreen.style.display !== "none"
+    if (event.key === "ArrowRight" && !isEndScreenActive) {
+      nextSlide(); resetTimer(); event.preventDefault();
+    }
+    if (event.key === "ArrowLeft" && !isEndScreenActive) {
+      prevSlide(); resetTimer(); event.preventDefault();
+    }
+    if ((event.key === "Enter" || event.key === " ") && activeStart) {
+      startExperience(); event.preventDefault();
+    }
+    if (event.key === "Escape" && isEndScreenActive) {
+      resetSlideshow();
+    }
+  })
+}
+
+startScreen.addEventListener("click", startExperience)
+startScreen.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === " ") {
+    startExperience();
+  }
 })
 
-if(i===slides.length-1){
-setTimeout(()=>{
-document.getElementById("endScreen").classList.add("show")
-isEndScreenActive=true
-clearInterval(timer)
-},500)
-}else{
-document.getElementById("endScreen").classList.remove("show")
-isEndScreenActive=false
-}
-}
-
-function nextSlide(){
-current=(current+1)%slides.length
-showSlide(current)
-}
-
-function prevSlide(){
-current=(current-1+slides.length)%slides.length
-showSlide(current)
-}
-
-function resetTimer(){
-clearInterval(timer)
-timer=setInterval(nextSlide,2800)
-}
-
-function startExperience(){
-document.querySelector(".start-screen").style.display="none"
-document.getElementById("bgMusic").play().catch(()=>{})
-showSlide(current)
-resetTimer()
-}
-
-function resetSlideshow(){
-current=0
-isEndScreenActive=false
-document.getElementById("endScreen").classList.remove("show")
-showSlide(current)
-resetTimer()
-}
-
-function viewAllSlides(){
-document.getElementById("endScreen").classList.remove("show")
-const gridView=document.getElementById("gridView")
-gridView.innerHTML=""
-slides.forEach((slide,index)=>{
-const mainImg=slide.querySelector(".main")
-const src=mainImg.src
-const gridItem=document.createElement("div")
-gridItem.className="grid-item"
-gridItem.innerHTML=`<img src="${src}" alt="Slide ${index+1}">`
-gridItem.onclick=()=>viewSlideFromGrid(index)
-gridView.appendChild(gridItem)
-})
-gridView.classList.add("show")
-document.getElementById("gridBackBtn").style.display="block"
-}
-
-function closeGridView(){
-const gridView=document.getElementById("gridView")
-gridView.classList.remove("show")
-document.getElementById("gridBackBtn").style.display="none"
-isEndScreenActive=true
-document.getElementById("endScreen").classList.add("show")
-}
-
-function viewSlideFromGrid(index){
-const gridView=document.getElementById("gridView")
-gridView.classList.remove("show")
-document.getElementById("gridBackBtn").style.display="none"
-isEndScreenActive=false
-current=index
-showSlide(current)
-setTimeout(()=>{
-resetTimer()
-},5000)
-}
-
-/* navigation */
-
-document.querySelector(".prev").addEventListener("click",e=>{
-if(isEndScreenActive)return
-e.stopPropagation()
-prevSlide()
-resetTimer()
+document.querySelector(".prev").addEventListener("click", (e) => {
+  if (isEndScreenActive) return
+  e.stopPropagation(); prevSlide(); resetTimer()
 })
 
-document.querySelector(".next").addEventListener("click",e=>{
-if(isEndScreenActive)return
-e.stopPropagation()
-nextSlide()
-resetTimer()
+document.querySelector(".next").addEventListener("click", (e) => {
+  if (isEndScreenActive) return
+  e.stopPropagation(); nextSlide(); resetTimer()
 })
 
-document.querySelector(".slideshow").addEventListener("click",()=>{
-if(isEndScreenActive)return
-nextSlide()
-resetTimer()
+slidesContainer.addEventListener("click", () => {
+  if (isEndScreenActive) return
+  nextSlide(); resetTimer()
 })
 
-/* swipe */
-
-let touchStart=0
-
-window.addEventListener("touchstart",e=>{
-touchStart=e.changedTouches[0].screenX
+window.addEventListener("touchstart", (e) => {
+  touchStart = e.changedTouches[0].screenX
 })
 
-window.addEventListener("touchend",e=>{
-if(isEndScreenActive)return
-let dx=e.changedTouches[0].screenX-touchStart
-if(Math.abs(dx)>60){
-if(dx<0){nextSlide()}
-else{prevSlide()}
-resetTimer()
-}
+window.addEventListener("touchend", (e) => {
+  if (isEndScreenActive) return
+  const dx = e.changedTouches[0].screenX - touchStart
+  if (Math.abs(dx) > 60) {
+    if (dx < 0) nextSlide()
+    else prevSlide()
+    resetTimer()
+  }
 })
 
-/* better heart particles */
+let touchStart = 0
 
-function createParticle(){
-const heart=document.createElement("div")
-heart.className="particle"
-heart.style.left=Math.random()*100+"vw"
-heart.style.animationDuration=(7+Math.random()*4)+"s"
-heart.innerHTML=`<svg viewBox="0 0 24 24" fill="#ff6b81" style="width:100%;height:100%;filter:drop-shadow(0 0 8px rgba(255,107,129,0.8));">
-<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-</svg>`
-document.body.appendChild(heart)
-setTimeout(()=>heart.remove(),12000)
-}
-
-setInterval(createParticle,900)
-
-/* easter egg */
-
-let clicks=0
-
-document.addEventListener("click",()=>{
-clicks++
-
-if(clicks===6){
-document.getElementById("secret").style.opacity=1
-setTimeout(()=>{document.getElementById("secret").style.opacity=0},4000)
-clicks=0
-}
-
-setTimeout(()=>clicks=0,2000)
-})
+startParticles()
+initKeyboard()
+updateAudioToggle()
 
 </script>
 
 </body>
 
 </html>
-
 
