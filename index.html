@@ -240,6 +240,7 @@ z-index:50;
 .grid-view.show{
 opacity:1;
 visibility:visible;
+z-index:150;
 }
 .grid-item{
 position:relative;
@@ -273,12 +274,23 @@ padding:12px 24px;
 font-size:16px;
 border-radius:50px;
 cursor:pointer;
-z-index:60;
+z-index:160;
 transition:all 0.3s;
 }
 .grid-back-button:hover{
 background:#ff5268;
 transform:scale(1.05);
+}
+
+/* PC improvements */
+@media (min-width: 768px) {
+  .grid-view {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  .nav {
+    font-size: 3rem;
+    padding: 0.6rem 1.2rem;
+  }
 }
 
 /* very very hard to find unless idk*/
@@ -452,13 +464,13 @@ function viewAllSlides() {
   gridView.style.display = "grid"
   gridView.style.opacity = "1"
   gridView.style.visibility = "visible"
-  gridView.style.zIndex = "99"
+  gridView.style.zIndex = "150"
   document.body.style.overflow = "auto" /* allow scrolling on grid */
 
   slides.forEach((slide, index) => {
     const mainImg = slide.querySelector(".main")
     const src = mainImg?.src || "fallback.jpg"
-    const gridItem = document.createElement("div")
+    const gridItem = document.creitateElement("div")
     gridItem.className = "grid-item"
     gridItem.innerHTML = `<img src="${src}" alt="Slide ${index + 1}">`
     gridItem.onclick = () => viewSlideFromGrid(index)
