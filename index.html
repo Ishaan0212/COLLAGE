@@ -66,7 +66,6 @@ text-align:center;
 @media (prefers-reduced-motion: reduce) {
   .slideshow,
   .main,
-  .particle,
   .slide,
   .end-screen,
   .grid-view {
@@ -274,7 +273,7 @@ padding:12px 24px;
 font-size:16px;
 border-radius:50px;
 cursor:pointer;
-z-index:160;
+z-index:60;
 transition:all 0.3s;
 }
 .grid-back-button:hover{
@@ -464,13 +463,13 @@ function viewAllSlides() {
   gridView.style.display = "grid"
   gridView.style.opacity = "1"
   gridView.style.visibility = "visible"
-  gridView.style.zIndex = "150"
+  gridView.style.zIndex = "99"
   document.body.style.overflow = "auto" /* allow scrolling on grid */
 
   slides.forEach((slide, index) => {
     const mainImg = slide.querySelector(".main")
     const src = mainImg?.src || "fallback.jpg"
-    const gridItem = document.creitateElement("div")
+    const gridItem = document.createElement("div")
     gridItem.className = "grid-item"
     gridItem.innerHTML = `<img src="${src}" alt="Slide ${index + 1}">`
     gridItem.onclick = () => viewSlideFromGrid(index)
