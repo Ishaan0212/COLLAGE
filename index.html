@@ -128,12 +128,12 @@ color:white;
 font-size:2rem;
 padding:0.4rem 0.9rem;
 cursor:pointer;
-opacity:0;
+opacity:0.4; /* always visible */
 transition:opacity .3s;
 z-index:5;
 }
 
-.slideshow:hover .nav{opacity:.8;}
+.slideshow:hover .nav{opacity:0.9;}
 .nav:hover{opacity:1;}
 
 .nav.prev{left:20px;}
@@ -149,7 +149,7 @@ height:60px;
 opacity:1;
 animation:floatUp 8s linear forwards;
 pointer-events:none;
-z-index:3;
+z-index:110; /* show on top */
 }
 
 @keyframes floatUp{
@@ -329,6 +329,7 @@ pointer-events:none;
 <p style="font-size:20px;opacity:.8;margin-bottom:30px;">don't kill me for the pics.</p>
 <button class="end-screen-button" onclick="viewAllSlides()">View All Slides</button>
   <button class="end-screen-button" onclick="resetSlideshow()">Watch Again</button>
+</div>
 
 <div class="grid-view" id="gridView"></div>
 <button class="grid-back-button" id="gridBackBtn" style="display:none;" onclick="closeGridView()">← Back</button>
@@ -444,9 +445,14 @@ function resetSlideshow() {
 }
 
 function viewAllSlides() {
+  console.log('viewAllSlides triggered')
   document.getElementById("endScreen").classList.remove("show")
   const gridView = document.getElementById("gridView")
   gridView.innerHTML = ""
+  gridView.style.display = "grid"
+  gridView.style.opacity = "1"
+  gridView.style.visibility = "visible"
+  gridView.style.zIndex = "99"
   document.body.style.overflow = "auto" /* allow scrolling on grid */
 
   slides.forEach((slide, index) => {
@@ -464,7 +470,12 @@ function viewAllSlides() {
 }
 
 function closeGridView() {
-  document.getElementById("gridView").classList.remove("show")
+  console.log('closeGridView triggered')
+  const gridView = document.getElementById("gridView")
+  gridView.classList.remove("show")
+  gridView.style.display = "none"
+  gridView.style.opacity = "0"
+  gridView.style.visibility = "hidden"
   gridBackBtn.style.display = "none"
   document.body.style.overflow = "hidden"
   isEndScreenActive = true
@@ -486,6 +497,7 @@ function createParticle() {
   const heart = document.createElement("div")
   heart.className = "particle"
   heart.style.left = Math.random() * 100 + "vw"
+  heart.style.bottom = "0"
   heart.style.animationDuration = (7 + Math.random() * 4) + "s"
   heart.innerHTML = `<svg viewBox="0 0 24 24" fill="#ff6b81" style="width:100%;height:100%;filter:drop-shadow(0 0 8px rgba(255,107,129,0.8));"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`
   document.body.appendChild(heart)
