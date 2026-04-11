@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Memories</title>
-
+<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
 <style>
 
 body{
@@ -217,7 +217,6 @@ background:#ff5268;
 transform:scale(1.05);
 }
 
-
 .grid-view{
 position:fixed;
 top:0;
@@ -281,6 +280,59 @@ background:#ff5268;
 transform:scale(1.05);
 }
 
+.letter-screen{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.95);
+display:flex;
+justify-content:center;
+align-items:center;
+opacity:0;
+visibility:hidden;
+transition:opacity 0.4s, visibility 0.4s;
+z-index:200;
+}
+.letter-screen.show{
+opacity:1;
+visibility:visible;
+}
+.letter-content{
+background:rgba(20,20,20,0.94);
+padding:40px;
+border-radius:20px;
+border:3px solid #ff6b81;
+text-align:center;
+max-height:80vh;
+max-width:700px;
+width:90%;
+overflow-y:auto;
+-webkit-overflow-scrolling: touch;
+}
+.letter-text{
+font-size:18px;
+line-height:1.8;
+color:white;
+text-align:left;
+white-space:pre-wrap;
+word-wrap:break-word;
+opacity:0;
+animation:fadeInScroll 8s ease-in-out forwards;
+font-family:'Indie Flower', cursive;
+}
+@keyframes fadeInScroll{
+0%{
+opacity:0;
+transform:translateY(20px);
+}
+100%{
+opacity:1;
+transform:translateY(0);
+}
+}
+
 /* PC improvements */
 @media (min-width: 768px) {
   .grid-view {
@@ -313,7 +365,9 @@ pointer-events:none;
 <body>
 
 <div class="start-screen" id="startScreen" tabindex="0" role="button" aria-label="Start slideshow">
-  <div>TAP TO BEGIN. It's a little slow at first but it gets better I promise pakka!</div>
+  <div style="font-size:2rem; letter-spacing:3px;">HAPPY 1 MONTH ANNIVERSARY BABY</div>
+  <div style="margin-top:12px; opacity:.85; font-size:1rem;">here's a lil tribute to us with screenshots u didnt know i had</div>
+  <div style="margin-top:12px; opacity:.85; font-size:1rem;">TAP TO BEGIN. It's a little slow at first but it gets better I promise pakka!</div>
   <div class="start-controls" style="margin-top:16px; display:flex; gap:10px; align-items:center;">
     <button id="startBtn" class="end-screen-button" onclick="startExperience()" aria-label="Start slideshow">Start</button>
     <button id="audioToggle" class="end-screen-button" onclick="toggleAudio()" aria-label="Toggle background music">Music: On</button>
@@ -340,6 +394,19 @@ pointer-events:none;
 <p style="font-size:20px;opacity:.8;margin-bottom:30px;">don't kill me for the pics.</p>
 <button class="end-screen-button" onclick="viewAllSlides()">View All Slides</button>
   <button class="end-screen-button" onclick="resetSlideshow()">Watch Again</button>
+  <button class="end-screen-button" onclick="showLetterScreen()">Read Letter</button>
+</div>
+
+<div class="letter-screen" id="letterScreen">
+  <div class="letter-content">
+    <h2 style="color:#ff6b81;margin-bottom:30px;">A Letter For You</h2>
+    <div class="letter-text" id="letterText">Dearest
+
+HIIIIIIIIIIIIIIII MY BABY CAN YOU BELIEVE THAT IT WILL BE OUR FIRST OFFICIAL MONTH TOGETHER IN A FEW HOURS(APPROX 19-20)HOURS. Thank you for making me the happiest boy in the world. I don't know how you have been so patient with me for the last 156 days but goddamn if i was in your position i would have left me a long time ago.AND THANK YOU FOR BEING THE BEST KISSING SENSEI IN THE WORLD, not that i've had others but im 100000000000% sure you are the best hehehehhe. You've made my life better in a lot of ways and made me better too in more ways. I HAD PROMISED TO MAKE ALL THE FIRST MOVES and i promise to stick to that. I LOVE YOU SO MUCH SANJEEVANI. MWAHHHHH
+
+-Gorilla</div>
+    <button class="end-screen-button" style="margin-top:30px;" onclick="closeLetterScreen()">Close</button>
+  </div>
 </div>
 
 <div class="grid-view" id="gridView"></div>
@@ -490,6 +557,21 @@ function closeGridView() {
   gridBackBtn.style.display = "none"
   document.body.style.overflow = "hidden"
   isEndScreenActive = true
+  document.getElementById("endScreen").classList.add("show")
+}
+
+function showLetterScreen() {
+  document.getElementById("letterScreen").classList.add("show")
+  document.getElementById("endScreen").classList.remove("show")
+  document.getElementById("gridView").classList.remove("show")
+  document.getElementById("gridView").style.display = "none"
+  document.getElementById("gridBackBtn").style.display = "none"
+  document.body.style.overflow = "hidden"
+}
+
+function closeLetterScreen() {
+  document.getElementById("letterScreen").classList.remove("show")
+  document.body.style.overflow = "hidden"
   document.getElementById("endScreen").classList.add("show")
 }
 
